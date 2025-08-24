@@ -246,15 +246,15 @@ export default function Footer() {
       </div>
 
       {/* Scroll to top button - Enhanced Mobile Design */}
-      <button
-        className={`fixed right-4 bottom-4 sm:right-6 sm:bottom-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-yellow-500 text-black flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover-scale ${
+      {/* <button
+        className={`fixed right-4 bottom-14 sm:right-6 sm:bottom-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-yellow-500 text-black flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover-scale ${
           isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={scrollToTop}
         aria-label="Scroll to top"
       >
         <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
-      </button>
+      </button> */}
 
       {/* Bottom decorative element */}
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-600"></div>
