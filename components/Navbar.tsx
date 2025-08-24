@@ -143,18 +143,27 @@ export default function Navbar() {
 
           {/* Mobile Order Button & Menu Button */}
           <div className="flex items-center space-x-2 lg:hidden">
-            <Link
-              href="/order"
-              className="bg-yellow-400 text-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold hover:bg-yellow-500 transition-colors"
-            >
-              Order
-            </Link>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-md ${isScrolled ? "text-gray-900" : "text-white"}`}
-            >
-              {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
-            </button>
+       <div className="flex items-center gap-3 sm:gap-4">
+  <Link
+    href="/order"
+    className="bg-yellow-400 text-black px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors text-sm sm:text-base"
+  >
+    Order Now
+  </Link>
+
+  <button
+    onClick={() => setIsOpen(!isOpen)}
+    className={`p-2 rounded-md border border-transparent hover:border-gray-300 transition-colors ${
+      isScrolled ? "text-gray-900" : "text-white"
+    }`}
+  >
+    {isOpen ? (
+      <X className="w-5 h-5 sm:w-6 sm:h-6" />
+    ) : (
+      <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
+    )}
+  </button>
+</div>
           </div>
         </div>
       </div>
