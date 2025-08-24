@@ -14,7 +14,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://almacca-caterers.com"),
+  metadataBase: new URL("https://almacca.com/"),
   title: {
     default: "Al-Macca Caterers & Event Planner - Premium Catering Services in Pakistan",
     template: "%s | Al-Macca Caterers",
@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Al-Macca Caterers" }],
   creator: "Al-Macca Caterers & Event Planner",
   publisher: "Al-Macca Caterers",
+  icons: {
+    icon: "/images/logo.jpeg", 
+  },
   robots: {
     index: true,
     follow: true,
@@ -49,14 +52,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://almacca-caterers.com",
+    url: "https://almacca.com/",
     title: "Al-Macca Caterers & Event Planner - Premium Catering Services",
     description:
       "Premium catering services for weddings, corporate events, and special occasions. Authentic Pakistani cuisine with professional service.",
     siteName: "Al-Macca Caterers",
     images: [
       {
-        url: "/images/hero-food.jpeg",
+        url: "/images/logo.jpeg",
         width: 1200,
         height: 630,
         alt: "Al-Macca Caterers - Premium Food Service",
@@ -67,17 +70,18 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Al-Macca Caterers & Event Planner",
     description: "Premium catering services for all your special events",
-    images: ["/images/hero-food.jpeg"],
+    images: ["/images/logo.jpeg"],
     creator: "@almaccacaterers",
   },
   verification: {
     google: "your-google-verification-code",
   },
   alternates: {
-    canonical: "https://almacca-caterers.com",
+    canonical: "https://almacca.com",
   },
-    generator: 'v0.dev'
+  generator: "BSH SOLUTIONS",
 }
+
 
 export default function RootLayout({
   children,
