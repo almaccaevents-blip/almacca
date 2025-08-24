@@ -91,173 +91,168 @@ export default function HeroSlider() {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      {/* Background Images */}
+    <div className="relative h-screen overflow-hidden flex flex-col justify-between">
+  {/* Background Images */}
+  {slides.map((slide, index) => (
+    <div
+      key={slide.id}
+      className={`absolute inset-0 transition-opacity duration-1000 ${
+        index === currentSlide ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      <Image
+        src={slide.image || "/placeholder.svg"}
+        alt={slide.title}
+        fill
+        className="object-cover"
+        priority={index === 0}
+        sizes="100vw"
+        quality={85}
+      />
+      <div className="absolute inset-0 bg-black/50" />
+    </div>
+  ))}
+
+  {/* Floating Elements */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-2 sm:w-4 h-2 sm:h-4 bg-yellow-400 rounded-full animate-pulse opacity-60" />
+    <div className="absolute top-20 sm:top-40 right-10 sm:right-20 w-3 sm:w-6 h-3 sm:h-6 bg-yellow-400 rounded-full animate-bounce opacity-40" />
+    <div className="absolute bottom-20 sm:bottom-40 left-10 sm:left-20 w-2 sm:w-3 h-2 sm:h-3 bg-yellow-400 rounded-full animate-ping opacity-50" />
+    <div className="absolute bottom-30 sm:bottom-60 right-5 sm:right-10 w-2 sm:w-5 h-2 sm:h-5 bg-yellow-400 rounded-full animate-pulse opacity-30" />
+  </div>
+
+  {/* Content Centered for Mobile */}
+  <div className="relative z-10 flex items-center justify-center text-center h-full px-4 sm:px-6">
+    <div className="max-w-4xl w-full">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+          className={`transition-all duration-1000 ${
+            index === currentSlide
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
           }`}
         >
-          <Image
-            src={slide.image || "/placeholder.svg"}
-            alt={slide.title}
-            fill
-            className="object-cover"
-            priority={index === 0}
-            sizes="100vw"
-            quality={85}
-          />
-          <div className="absolute inset-0 bg-black/50" />
+          {index === currentSlide && (
+            <>
+              {/* Stats Bar */}
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2">
+                  <Calendar className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400" />
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    {slide.stats.events} Events
+                  </span>
+                </div>
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2">
+                  <Star className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    {slide.stats.rating} Rating
+                  </span>
+                </div>
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2">
+                  <Users className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400" />
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    {slide.stats.guests} Served
+                  </span>
+                </div>
+              </div>
+
+              {/* Main Content */}
+              <div className="space-y-3 sm:space-y-6">
+                <div className="inline-block">
+                  <span className="bg-yellow-400 text-black px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+                    Serving Since 2010
+                  </span>
+                </div>
+
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight">
+                  {slide.title}
+                </h1>
+
+                <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-yellow-400 font-semibold">
+                  {slide.subtitle}
+                </h2>
+
+                <p className="text-sm sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+                  {slide.description}
+                </p>
+
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 justify-center">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-yellow-400 text-black hover:bg-yellow-500 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-semibold w-full sm:w-auto order-1"
+                  >
+                    <Link href={slide.link}>{slide.cta}</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="border-white text-white hover:bg-white hover:text-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-transparent w-full sm:w-auto order-2"
+                  >
+                    <Link href="/contact">Contact Us</Link>
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       ))}
+    </div>
+  </div>
 
-      {/* Floating Elements - Enhanced Mobile Responsiveness */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-2 sm:w-4 h-2 sm:h-4 bg-yellow-400 rounded-full animate-pulse opacity-60" />
-        <div className="absolute top-20 sm:top-40 right-10 sm:right-20 w-3 sm:w-6 h-3 sm:h-6 bg-yellow-400 rounded-full animate-bounce opacity-40" />
-        <div className="absolute bottom-20 sm:bottom-40 left-10 sm:left-20 w-2 sm:w-3 h-2 sm:h-3 bg-yellow-400 rounded-full animate-ping opacity-50" />
-        <div className="absolute bottom-30 sm:bottom-60 right-5 sm:right-10 w-2 sm:w-5 h-2 sm:h-5 bg-yellow-400 rounded-full animate-pulse opacity-30" />
-      </div>
+  {/* Controls & Arrows at Bottom for Mobile */}
+  <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-3 sm:gap-4 w-full">
+    {/* Play/Pause & Indicators */}
+    <div className="flex items-center space-x-2 sm:space-x-4 bg-white/10 backdrop-blur-sm rounded-full px-3 sm:px-6 py-2 sm:py-3">
+      <button
+        onClick={togglePlayPause}
+        className="text-white hover:text-yellow-400 transition-colors"
+        aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+        title={isPlaying ? "Pause slideshow" : "Play slideshow"}
+      >
+        {isPlaying ? (
+          <Pause className="w-3 sm:w-5 h-3 sm:h-5" />
+        ) : (
+          <Play className="w-3 sm:w-5 h-3 sm:h-5" />
+        )}
+      </button>
 
-      {/* Content - Enhanced Mobile Layout */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl">
-            {slides.map((slide, index) => (
-              <div
-                key={slide.id}
-                className={`transition-all duration-1000 ${
-                  index === currentSlide
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
-              >
-                {index === currentSlide && (
-                  <>
-                    {/* Stats Bar - Enhanced Mobile Layout */}
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
-                      <div className="flex items-center space-x-1 sm:space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2">
-                        <Calendar className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400" />
-                        <span className="text-white text-xs sm:text-sm font-medium">
-                          {slide.stats.events} Events
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-1 sm:space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2">
-                        <Star className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />
-                        <span className="text-white text-xs sm:text-sm font-medium">
-                          {slide.stats.rating} Rating
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-1 sm:space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2">
-                        <Users className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400" />
-                        <span className="text-white text-xs sm:text-sm font-medium">
-                          {slide.stats.guests} Served
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Main Content - Improved Mobile Typography */}
-                    <div className="space-y-3 sm:space-y-6">
-                      <div className="inline-block">
-                        <span className="bg-yellow-400 text-black px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
-                          Serving Since 2010
-                        </span>
-                      </div>
-
-                      <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight">
-                        {slide.title}
-                      </h1>
-
-                      <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-yellow-400 font-semibold">
-                        {slide.subtitle}
-                      </h2>
-
-                      <p className="text-sm sm:text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed">
-                        {slide.description}
-                      </p>
-
-                      {/* Buttons - Enhanced Mobile Layout */}
-                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-                        <Button
-                          asChild
-                          size="lg"
-                          className="bg-yellow-400 text-black hover:bg-yellow-500 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-semibold w-full sm:w-auto order-1"
-                        >
-                          <Link href={slide.link}>{slide.cta}</Link>
-                        </Button>
-                        <Button
-                          asChild
-                          variant="outline"
-                          size="lg"
-                          className="border-white text-white hover:bg-white hover:text-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-transparent w-full sm:w-auto order-2"
-                        >
-                          <Link href="/contact">Contact Us</Link>
-                        </Button>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Controls - Enhanced Mobile Responsiveness */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center space-x-2 sm:space-x-4 bg-white/10 backdrop-blur-sm rounded-full px-3 sm:px-6 py-2 sm:py-3">
-
-          {/* Play/Pause Button */}
+      <div className="flex space-x-1 sm:space-x-2">
+        {slides.map((_, index) => (
           <button
-            onClick={togglePlayPause}
-            className="text-white hover:text-yellow-400 transition-colors"
-            aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-            title={isPlaying ? "Pause slideshow" : "Play slideshow"}
+            key={index}
+            onClick={() => goToSlide(index)}
+            className="relative w-6 sm:w-12 h-1 sm:h-2 bg-white/30 rounded-full overflow-hidden"
+            aria-label={`Go to slide ${index + 1}`}
+            title={`Slide ${index + 1}`}
           >
-            {isPlaying ? (
-              <Pause className="w-3 sm:w-5 h-3 sm:h-5" />
-            ) : (
-              <Play className="w-3 sm:w-5 h-3 sm:h-5" />
-            )}
+            <div
+              className={`absolute left-0 top-0 h-full bg-yellow-400 transition-all duration-100 ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+              style={{
+                width: index === currentSlide ? `${progress}%` : "0%",
+              }}
+            />
+            <div
+              className={`absolute left-0 top-0 h-full transition-all duration-300 ${
+                index === currentSlide ? "bg-yellow-400" : "bg-white/50"
+              }`}
+              style={{ width: index < currentSlide ? "100%" : "0%" }}
+            />
           </button>
-
-          {/* Slide Indicators - Mobile Optimized */}
-          <div className="flex space-x-1 sm:space-x-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className="relative w-6 sm:w-12 h-1 sm:h-2 bg-white/30 rounded-full overflow-hidden"
-                aria-label={`Go to slide ${index + 1}`}
-                title={`Slide ${index + 1}`}
-              >
-                <div
-                  className={`absolute left-0 top-0 h-full bg-yellow-400 transition-all duration-100 ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
-                  style={{
-                    width: index === currentSlide ? `${progress}%` : "0%",
-                  }}
-                />
-                <div
-                  className={`absolute left-0 top-0 h-full transition-all duration-300 ${
-                    index === currentSlide ? "bg-yellow-400" : "bg-white/50"
-                  }`}
-                  style={{ width: index < currentSlide ? "100%" : "0%" }}
-                />
-              </button>
-            ))}
-          </div>
-
-        </div>
+        ))}
       </div>
+    </div>
 
-      {/* Arrow Navigation - Mobile Optimized */}
+    {/* Arrows Centered Below */}
+    <div className="flex items-center gap-4">
       <button
         onClick={prevSlide}
-        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm text-white p-1.5 sm:p-3 rounded-full hover:bg-white/20 transition-all"
+        className="bg-white/10 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/20 transition-all"
         aria-label="Previous slide"
         title="Previous slide"
       >
@@ -266,12 +261,15 @@ export default function HeroSlider() {
 
       <button
         onClick={nextSlide}
-        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm text-white p-1.5 sm:p-3 rounded-full hover:bg-white/20 transition-all"
+        className="bg-white/10 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/20 transition-all"
         aria-label="Next slide"
         title="Next slide"
       >
         <ChevronRight className="w-4 sm:w-6 h-4 sm:h-6" />
       </button>
     </div>
+  </div>
+</div>
+
   );
 }
