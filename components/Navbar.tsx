@@ -43,33 +43,45 @@ export default function Navbar() {
         isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
-      {/* Top Bar - Enhanced Mobile Responsiveness */}
-      <div className="bg-black text-white py-1 sm:py-2 px-2 sm:px-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-xs sm:text-sm">
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            <div className="flex items-center space-x-1">
-              <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
-              <a href="tel:+923333227339" className="hover:text-yellow-400 transition-colors">
-                <span className="hidden xs:inline">0333-3227339</span>
-                <span className="xs:hidden">Call Us</span>
-              </a>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
-              <a href="mailto:info@almaccacaterers.com" className="hover:text-yellow-400 transition-colors">
-                <span className="hidden sm:inline">info@almaccacaterers.com</span>
-                <span className="sm:hidden">Email</span>
-              </a>
-            </div>
-          </div>
-          <div className="hidden lg:block">
-            <span>Premium Catering Services | Serving Since 2010</span>
-          </div>
-          <div className="lg:hidden text-xs">
-            <span>Since 2010</span>
-          </div>
-        </div>
+     {/* Top Bar - Hidden on Mobile */}
+<div className="bg-black text-white py-1 sm:py-2 px-2 sm:px-4 hidden md:block">
+  <div className="max-w-7xl mx-auto flex justify-between items-center text-xs sm:text-sm">
+    
+    {/* Contact Info */}
+    <div className="flex items-center space-x-4 sm:space-x-6">
+      <div className="flex items-center space-x-1">
+        <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
+        <a
+          href="tel:+923333227339"
+          className="hover:text-yellow-400 transition-colors"
+        >
+          0333-3227339
+        </a>
       </div>
+
+      <div className="flex items-center space-x-1">
+        <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
+        <a
+          href="mailto:info@almaccacaterers.com"
+          className="hover:text-yellow-400 transition-colors"
+        >
+          info@almaccacaterers.com
+        </a>
+      </div>
+    </div>
+
+    {/* Middle Text */}
+    <div>
+      <span>Premium Catering Services | Serving Since 2010</span>
+    </div>
+
+    {/* Powered By */}
+    <div className="text-gray-400">
+      Powered by <span className="text-yellow-400">BSH SOLUTIONS</span>
+    </div>
+  </div>
+</div>
+
 
       {/* Main Navigation - Enhanced Mobile Layout */}
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
@@ -144,12 +156,13 @@ export default function Navbar() {
           {/* Mobile Order Button & Menu Button */}
           <div className="flex items-center space-x-2 lg:hidden">
        <div className="flex items-center gap-3 sm:gap-4">
-  <Link
-    href="/order"
-    className="bg-yellow-400 text-black px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors text-sm sm:text-base"
-  >
-    Order Now
-  </Link>
+ <Link
+  href="/order"
+  className="bg-yellow-400 text-black px-2 sm:px-4 py-2 rounded-full h-10 font-semibold hover:bg-yellow-500 transition-colors text-sm sm:text-base flex items-center justify-center"
+>
+  Order Now
+</Link>
+
 
   <button
     onClick={() => setIsOpen(!isOpen)}
