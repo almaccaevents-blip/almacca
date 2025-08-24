@@ -1,0 +1,22 @@
+{
+  "name": "Al-Macca Caterers Setup",
+  "description": "Setup script for Al-Macca Caterers website",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "name": "Install Dependencies",
+      "command": "npm install",
+      "description": "Install all required dependencies"
+    },
+    {
+      "name": "Build Project",
+      "command": "npm run build",
+      "description": "Build the Next.js project"
+    },
+    {
+      "name": "Start Development Server",
+      "command": "npm run dev",
+      "description": "Start the development server"
+    }
+  ]
+}
