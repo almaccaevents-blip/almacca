@@ -9,7 +9,8 @@ import FloatingCart from "@/components/FloatingCart"
 import CartNotification from "@/components/CartNotification"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import { AnimationProvider } from "@/components/AnimationProvider"
-
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -90,6 +91,8 @@ export default function RootLayout({
           <AnimationProvider>
             <Navbar />
             <main>{children}</main>
+            <Analytics />
+             <SpeedInsights />
             <Footer />
             <WhatsAppButton />
             <FloatingCart />
